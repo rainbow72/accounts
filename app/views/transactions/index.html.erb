@@ -1,22 +1,22 @@
       <label for="year_select" class="form-label">Year:</label>
       <select class="form-select form-select-lg mb-4" id="year_select" aria-label="Year select">
         <% (0..99).each do |y| %>
-          <% if (2021-y)==2021 %>
-            <option selected value="<% 2021-y %>"><%= 2021-y %></option>
+          <% if y==0 %>
+            <option selected value="<% @year-y %>"><%= @year-y %></option>
           <% else %>
-            <option value="<% 2021-y %>"><%= 2021-y %></option>
+            <option value="<% @year-y %>"><%= @year-y %></option>
           <% end %>
         <% end %>
       </select>
       <label for="month_select" class="form-label">Month:</label>
       <select class="form-select form-select-lg mb-4" id="month_select" aria-label="Month select">
         <% (1..12).each do |m| %>
-          <% if m==7 %>
+          <% if m==@month %>
             <option selected value="<% m %>"><%= m %></option>
           <% else %>
             <option value="<% m %>"><%= m %></option>
           <% end %>
         <% end %>
       </select>
-      <button type="button" class="btn btn-primary">View</button>
+      <button type="button" class="btn btn-primary btn-sm">View</button>
       <button type="button" class="btn btn-primary">New</button>
