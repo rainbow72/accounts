@@ -1,4 +1,3 @@
-      <label for="year_select" class="form-label">Year:</label>
       <select class="form-select form-select-lg mb-4" id="year_select" aria-label="Year select">
         <% (0..99).each do |y| %>
           <% if y==0 %>
@@ -8,7 +7,6 @@
           <% end %>
         <% end %>
       </select>
-      <label for="month_select" class="form-label">Month:</label>
       <select class="form-select form-select-lg mb-4" id="month_select" aria-label="Month select">
         <% (1..12).each do |m| %>
           <% if m==@month %>
@@ -18,5 +16,33 @@
           <% end %>
         <% end %>
       </select>
-      <button type="button" class="btn btn-primary btn-sm">View</button>
-      <button type="button" class="btn btn-primary">New</button>
+      <%= link_to "View", root_url, class: "btn btn-primary btn-sm" %>
+      <%= link_to "New", root_url, class: "btn btn-primary btn-sm" %>
+
+<table class="table table-hover table-bordered">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col"><div class="text-center">Date</div></th>
+      <th scope="col"><div class="text-center">Description</div></th>
+      <th scope="col"><div class="text-center">Amount (JPY)</div></th>
+      <th scope="col"><div class="text-center">Major Category</div></th>
+      <th scope="col"><div class="text-center">Minor Category</div></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="text-center">7/6</div></td>
+      <td><div class="text-left">コンビニエンスストア</div></td>
+      <td><div class="text-right">550</div></td>
+      <td><div class="text-left">食費</div></td>
+      <td><div class="text-left">食料品</div></td>
+    </tr>
+    <tr>
+      <td><div class="text-center">7/6</div></td>
+      <td><div class="text-left">コンビニエンスストア</div></td>
+      <td><div class="text-right">550</div></td>
+      <td><div class="text-left">食費</div></td>
+      <td><div class="text-left">食料品</div></td>
+    </tr>
+  </tbody>
+</table>
