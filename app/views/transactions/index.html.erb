@@ -1,23 +1,23 @@
-      <select class="form-select form-select-lg mb-4" id="year_select" aria-label="Year select">
-        <% (0..99).each do |y| %>
-          <% if y==0 %>
-            <option selected value="<% @year-y %>"><%= @year-y %></option>
-          <% else %>
-            <option value="<% @year-y %>"><%= @year-y %></option>
-          <% end %>
-        <% end %>
-      </select>
-      <select class="form-select form-select-lg mb-4" id="month_select" aria-label="Month select">
-        <% (1..12).each do |m| %>
-          <% if m==@month %>
-            <option selected value="<% m %>"><%= m %></option>
-          <% else %>
-            <option value="<% m %>"><%= m %></option>
-          <% end %>
-        <% end %>
-      </select>
-      <%= link_to "View", root_url, class: "btn btn-primary btn-sm" %>
-      <%= link_to "New", root_url, class: "btn btn-primary btn-sm" %>
+<select class="form-select form-select-lg mb-4" id="year_select" aria-label="Year select">
+  <% (0..99).each do |y| %>
+    <% if y==0 %>
+      <option selected value="<% @year-y %>"><%= @year-y %></option>
+    <% else %>
+      <option value="<% @year-y %>"><%= @year-y %></option>
+    <% end %>
+  <% end %>
+</select>
+<select class="form-select form-select-lg mb-4" id="month_select" aria-label="Month select">
+  <% (1..12).each do |m| %>
+    <% if m==@month %>
+      <option selected value="<% m %>"><%= m %></option>
+    <% else %>
+      <option value="<% m %>"><%= m %></option>
+    <% end %>
+  <% end %>
+</select>
+<%= link_to "View", root_url, class: "btn btn-primary btn-sm" %>
+<%= link_to "New", new_transaction_path, class: "btn btn-primary btn-sm" %>
 
 <table class="table table-hover table-bordered">
   <thead class="table-primary">
@@ -25,8 +25,10 @@
       <th scope="col"><div class="text-center">Date</div></th>
       <th scope="col"><div class="text-center">Description</div></th>
       <th scope="col"><div class="text-center">Amount (JPY)</div></th>
+<!--
       <th scope="col"><div class="text-center">Major Category</div></th>
       <th scope="col"><div class="text-center">Minor Category</div></th>
+-->
     </tr>
   </thead>
   <tbody>
@@ -34,15 +36,19 @@
       <td><div class="text-center">7/6</div></td>
       <td><div class="text-left">コンビニエンスストア</div></td>
       <td><div class="text-right">550</div></td>
+<!--
       <td><div class="text-left">食費</div></td>
       <td><div class="text-left">食料品</div></td>
+-->
     </tr>
     <tr>
       <td><div class="text-center">7/6</div></td>
       <td><div class="text-left">コンビニエンスストア</div></td>
       <td><div class="text-right">550</div></td>
+<!--
       <td><div class="text-left">食費</div></td>
       <td><div class="text-left">食料品</div></td>
+-->
     </tr>
   </tbody>
 </table>

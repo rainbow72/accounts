@@ -1,8 +1,9 @@
 class TransactionsController < ApplicationController
+
   def index
     @year = Time.now.year
     @month = Time.now.month
-    @transactions = Transaction.order(t_date: :desc).page(params[:page]).per(25)
+    @transactions = Transaction.order(t_date: :desc)
   end
   
   def new
