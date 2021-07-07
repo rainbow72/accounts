@@ -1,9 +1,19 @@
 class TransactionsController < ApplicationController
+  require "date"
+  before_action :require_user_logged_in
+  before_action :correct_user, only: [:destroy]
 
   def index
-    @year = Time.now.year
-    @month = Time.now.month
-    @transactions = Transaction.order(t_date: :desc)
+    if params[:index_date]
+      @index_date = Date.new(params[:index_date])
+    else
+      @index_date = Date.today
+    end
+    d = @index_date
+    @transactions = current_user.transactions.where(t_date: d.beginning_of_month...d.end_of_month)
+    unless !!@transaction
+      @transaction = Transaction.new
+    end
   end
   
   def new
@@ -11,7 +21,8 @@ class TransactionsController < ApplicationController
   end
   
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = current_user.transactions.build(transaction_params)
+    @transaction.particular_id = 1
     if @transaction.save
       flash[:success] = "入出金記録を1件追加しました。"
       redirect_to root_url
@@ -46,6 +57,13 @@ class TransactionsController < ApplicationController
   private
   
   def transaction_params
-    params.require(:transaction).permit(:t_date, :description, :amount, :perticular_id)
+    params.require(:transaction).permit(:t_date, :description, :amount, :user_id, :perticular_id)
+  end
+
+  def correct_user
+    @transaction = current_user.transactions.find_by(id: params[:id])
+    unless @transaction
+      redirect_to root_url
+    end
   end
 end
