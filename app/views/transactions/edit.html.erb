@@ -7,7 +7,7 @@
   <div class="col-sm-6 offset-sm-3">
     <%= form_with(model: @transaction, local: true) do |f| %>
     
-      <%= render "layouts/error_messages", model: f.object %>
+      <%#= render "layouts/error_messages", model: f.object %>
 
       <div class="form-group">
         <%= f.label :t_date, "Date" %>
@@ -27,7 +27,7 @@
       <div class="text-aligned-end">
         <%= link_to "Cancel", root_url, {class: "btn btn-primary"} %>
         <%= f.submit "Save", class: "btn btn-primary" %>
-        <%= link_to "Delete", transaction, method: :delete, data: { confirm: "You sure?" }, {class: "btn btn-primary"} %>
+        <%= link_to "Delete", transaction_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
       </div>
 
     <% end %>

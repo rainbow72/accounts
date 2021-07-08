@@ -4,12 +4,12 @@
       <%#= render "layouts/error_messages", model: f.object %>
       <div class="form-group">
         <%= f.date_select :t_date, use_month_numbers: true, discard_day: true, start_year: Date.today.year, end_year: 1900, selected: @d, class: "form-control" %>
-        <%= f.submit "View", class: "btn btn-primary btn-md" %>
+        <%= f.submit "View", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
   <div class="col-sm-1">
-    <%= link_to "New", new_transaction_path, class: "btn btn-primary btn-md" %>
+    <%= link_to "New", new_transaction_path, class: "btn btn-primary" %>
   </div>
 </div>
 
@@ -25,9 +25,9 @@
 -->
     </tr>
   </thead>
-  <% @results.each do |result| %>
-    <tbody>
-      <tr data-href="<%= transaction_path(result) %>">
+  <tbody>
+    <% @results.each do |result| %>
+      <tr class="clickable-row" data-href="/transactions/<%= result.id %>/edit">
         <td><div class="text-center"><%= result.t_date %></div></td>
         <td><div class="text-left"><%= result.description %></div></td>
         <td><div class="text-right"><%= result.amount %></div></td>
@@ -36,6 +36,14 @@
         <td><div class="text-left"><%#= result.minor_category %></div></td>
   -->
       </tr>
-    </tbody>
-  <% end %>
+    <% end %>
+  </tbody>
 </table>
+
+<script>
+  $(function($) {
+      $(".clickable-row").css("cursor","pointer").click(function() {
+          location.href = $(this).data("href");
+      });
+  });
+</script>
