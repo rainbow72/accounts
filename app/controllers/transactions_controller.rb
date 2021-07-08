@@ -47,7 +47,11 @@ class TransactionsController < ApplicationController
   end
   
   def search
-    @d = Date.new
+    @d = Date.new(
+      params["t_date(1i)"].to_i,
+      params["t_date(2i)"].to_i,
+      params["t_date(3i)"].to_i
+    )
     @results = current_user.transactions.where(t_date: @d.beginning_of_month...@d.end_of_month)
   end
   
