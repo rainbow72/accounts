@@ -4,16 +4,8 @@ class TransactionsController < ApplicationController
   before_action :correct_user, only: [:destroy]
 
   def index
-    if params[:index_date]
-      @index_date = Date.new(params[:index_date])
-    else
-      @index_date = Date.today
-    end
-    d = @index_date
-    @transactions = current_user.transactions.where(t_date: d.beginning_of_month...d.end_of_month)
-    unless !!@transaction
-      @transaction = Transaction.new
-    end
+    @d = Date.today
+    @results = current_user.transactions.where(t_date: @d.beginning_of_month...@d.end_of_month)
   end
   
   def new
@@ -52,6 +44,11 @@ class TransactionsController < ApplicationController
     @transaction.destroy
     flash[:success] = "1件の入出金記録を削除しました。"
     redirect_to transactions_url
+  end
+  
+  def search
+    @d = Date.new
+    @results = current_user.transactions.where(t_date: @d.beginning_of_month...@d.end_of_month)
   end
   
   private

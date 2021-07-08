@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-11">
+    <%= form_with url: search_transactions_path, local: true do |f| %>
+      <%#= render "layouts/error_messages", model: f.object %>
+      <div class="form-group">
+        <%= f.date_select :t_date, use_month_numbers: true, discard_day: true, start_year: Date.today.year, end_year: 1900, class: "form-control" %>
+        <%= link_to "View", search_transactions_path, class: "btn btn-primary btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-sm-1">
+    <%= link_to "New", new_transaction_path, class: "btn btn-primary btn-sm" %>
+  </div>
+</div>
+
+<table class="table table-hover table-bordered">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col"><div class="text-center">Date</div></th>
+      <th scope="col"><div class="text-center">Description</div></th>
+      <th scope="col"><div class="text-center">Amount (JPY)</div></th>
+<!--
+      <th scope="col"><div class="text-center">Major Category</div></th>
+      <th scope="col"><div class="text-center">Minor Category</div></th>
+-->
+    </tr>
+  </thead>
+  <% @results.each do |result| %>
+    <tbody>
+      <tr data-href="<%= transaction_path(result) %>">
+        <td><div class="text-center"><%= result.t_date %></div></td>
+        <td><div class="text-left"><%= result.description %></div></td>
+        <td><div class="text-right"><%= result.amount %></div></td>
+  <!--
+        <td><div class="text-left"><%#= result.particular_id %></div></td>
+        <td><div class="text-left"><%#= result.minor_category %></div></td>
+  -->
+      </tr>
+    </tbody>
+  <% end %>
+</table>
