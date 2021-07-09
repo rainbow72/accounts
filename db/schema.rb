@@ -10,24 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_081144) do
+ActiveRecord::Schema.define(version: 2021_07_09_054923) do
 
-  create_table "particulars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "major_category"
-    t.string "minor_category"
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "t_date"
-    t.string "description"
-    t.bigint "amount"
-    t.bigint "user_id"
-    t.bigint "particular_id"
+  create_table "subcategories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "subcategory"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["particular_id"], name: "index_transactions_on_particular_id"
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "tdate"
+    t.string "description"
+    t.bigint "amount"
+    t.bigint "category_id"
+    t.bigint "subcategory_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["subcategory_id"], name: "index_transactions_on_subcategory_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -39,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_081144) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "transactions", "particulars"
+  add_foreign_key "subcategories", "categories"
+  add_foreign_key "transactions", "categories"
+  add_foreign_key "transactions", "subcategories"
   add_foreign_key "transactions", "users"
 end

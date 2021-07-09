@@ -5,31 +5,6 @@
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-    <%= form_with(model: @transaction, local: true) do |f| %>
-    
-      <%= render "layouts/error_messages", model: f.object %>
-
-      <div class="form-group">
-        <%= f.label :t_date, "Date" %>
-        <%= f.date_field :t_date, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :description, "Description" %>
-        <%= f.text_field :description, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :amount, "Amount" %>
-        <%= f.number_field :amount, class: "form-control" %>
-      </div>
-      
-      <div class="text-aligned-end">
-        <%= link_to "Cancel", root_url, {class: "btn btn-primary"} %>
-        <%= f.submit "Save", class: "btn btn-primary" %>
-      </div>
-
-    <% end %>
-
+    <%= render "transactions/form" %>
   </div>
 </div>

@@ -1,9 +1,8 @@
 <div class="row">
   <div class="col-sm-11">
     <%= form_with url: search_transactions_path, local: true do |f| %>
-      <%#= render "layouts/error_messages", model: f.object %>
       <div class="form-group">
-        <%= f.date_select :t_date, use_month_numbers: true, discard_day: true, start_year: Date.today.year, end_year: 1900, selected: @d, class: "form-control" %>
+        <%= f.date_select :tdate, use_month_numbers: true, discard_day: true, start_year: Date.today.year, end_year: 1900, selected: @d, class: "form-control" %>
         <%= f.submit "View", class: "btn btn-primary" %>
       </div>
     <% end %>
@@ -19,22 +18,18 @@
       <th scope="col"><div class="text-center">Date</div></th>
       <th scope="col"><div class="text-center">Description</div></th>
       <th scope="col"><div class="text-center">Amount (JPY)</div></th>
-<!--
       <th scope="col"><div class="text-center">Major Category</div></th>
       <th scope="col"><div class="text-center">Minor Category</div></th>
--->
     </tr>
   </thead>
   <tbody>
-    <% @results.each do |result| %>
-      <tr class="clickable-row" data-href="/transactions/<%= result.id %>/edit">
-        <td><div class="text-center"><%= result.t_date %></div></td>
-        <td><div class="text-left"><%= result.description %></div></td>
-        <td><div class="text-right"><%= result.amount %></div></td>
-  <!--
-        <td><div class="text-left"><%#= result.particular_id %></div></td>
-        <td><div class="text-left"><%#= result.minor_category %></div></td>
-  -->
+    <% @transactions.each do |transaction| %>
+      <tr class="clickable-row" data-href="/transactions/<%= transaction.id %>/edit">
+        <td><div class="text-center"><%= transaction.tdate %></div></td>
+        <td><div class="text-left"><%= transaction.description %></div></td>
+        <td><div class="text-right"><%= transaction.amount %></div></td>
+        <td><div class="text-left"><%= transaction.category %></div></td>
+        <td><div class="text-left"><%= transaction.subcategory %></div></td>
       </tr>
     <% end %>
   </tbody>

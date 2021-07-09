@@ -5,16 +5,17 @@ class TransactionsController < ApplicationController
 
   def index
     @d = Date.today
-    @results = current_user.transactions.where(t_date: @d.beginning_of_month...@d.end_of_month).order(t_date: :desc)
+    @transactions = current_user.transactions.where(tdate: @d.beginning_of_month...@d.end_of_month).order(tdate: :desc)
   end
   
   def new
-    @transaction = Transaction.new
+    @categories = Category.all()
+    @transaction = current_user.transactions.new()
   end
   
   def create
     @transaction = current_user.transactions.build(transaction_params)
-    @transaction.particular_id = 1
+    @transaction.category_id = 1
     if @transaction.save
       flash[:success] = "入出金記録を1件追加しました。"
       redirect_to root_url
@@ -29,7 +30,8 @@ class TransactionsController < ApplicationController
   end
   
   def edit
-    @transaction = Transaction.find(params[:id])
+    @categories = Category.all()
+    @transaction = current_user.transactions.find(params[:id])
   end
   
   def update
@@ -51,17 +53,17 @@ class TransactionsController < ApplicationController
   
   def search
     @d = Date.new(
-      params["t_date(1i)"].to_i,
-      params["t_date(2i)"].to_i,
-      params["t_date(3i)"].to_i
+      params["tdate(1i)"].to_i,
+      params["tdate(2i)"].to_i,
+      params["tdate(3i)"].to_i
     )
-    @results = current_user.transactions.where(t_date: @d.beginning_of_month...@d.end_of_month)
+    @transactions = current_user.transactions.where(tdate: @d.beginning_of_month...@d.end_of_month)
   end
   
   private
   
   def transaction_params
-    params.require(:transaction).permit(:t_date, :description, :amount, :user_id, :perticular_id)
+    params.require(:transaction).permit(:tdate, :description, :amount, :category_id, :subcategory_id, :user_id)
   end
 
   def correct_user
