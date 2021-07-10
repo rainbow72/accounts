@@ -1,1 +1,3 @@
-$("#subcategory_id").html("<%= j(options_for_select(@subcategories.pluck(:name, :id))) %>");
+<script type="text/javascript">
+  $("#subcategory_id").html("<%= escape_javascript(options_for_select(@subcategories.pluck(:name, :id))) %>");
+</script>

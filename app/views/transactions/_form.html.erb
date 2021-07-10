@@ -18,13 +18,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :category_id, "Category" %>
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), { include_blank: true}, class: "form-control" %>
+    <%= f.label :category, "Category" %>
+    <%= f.select :category, @categories, {id: "interrock_category"}, { include_blank: true } %>
   </div>
 
   <div class="form-group">
-    <%= f.label :subcategory_id, "Sub Category" %>
-    <%= f.select :subcategory_id, options_from_collection_for_select(Subcategory.all, :id, :name), { include_blank: true}, class: "form-control" %>
+    <%= f.label :subcategory, "Sub Category" %>
+    <%= f.select :subcategory, @subcategories, {id: "interrock_subcategory"}, { include_blank: true } %>
   </div>
 
   <div class="text-aligned-end">
@@ -34,12 +34,14 @@
 
 <% end %>
 
-<script>
-  $(function() {
-    $("#category_id").change(function() {
-      $.get({
-        url: "#interrock_subcategories_path", data: { category_id: $("category_id").has("option:selected").val() }
-      });
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#interrock_category").change(function() {
+      var category_id = $("#interrock_category").val();
+      $.get("<%= interrock_category_select_path %>",
+        { category_id: category_id },
+        function(data){ }
+      );
     });
   });
 </script>
