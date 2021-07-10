@@ -28,8 +28,8 @@
         <td><div class="text-center"><%= transaction.tdate %></div></td>
         <td><div class="text-left"><%= transaction.description %></div></td>
         <td><div class="text-right"><%= transaction.amount %></div></td>
-        <td><div class="text-left"><%= transaction.category %></div></td>
-        <td><div class="text-left"><%= transaction.subcategory %></div></td>
+        <td><div class="text-left"><%= transaction.category.name %></div></td>
+        <td><div class="text-left"><%= transaction.subcategory.name %></div></td>
       </tr>
     <% end %>
   </tbody>

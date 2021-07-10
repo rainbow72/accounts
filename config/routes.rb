@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create, :destroy]
+
+  get 'interrock/index'
+  get 'interrock/subcategories'
 end
