@@ -9,8 +9,9 @@ class TransactionsController < ApplicationController
   end
   
   def new
-    @categories = Category.all()
-    @transaction = current_user.transactions.new()
+    @categories = Category.all
+    @subcategories = Subcategory.where(category_id: params[:category_id])
+    @transaction = current_user.transactions.new
   end
   
   def create
