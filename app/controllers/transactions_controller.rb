@@ -31,8 +31,9 @@ class TransactionsController < ApplicationController
   end
   
   def edit
-    @categories = Category.all()
     @transaction = current_user.transactions.find(params[:id])
+    @categories = Category.all()
+    @subcategories = Subcategory.where(category_id: @transaction.category_id)
   end
   
   def update

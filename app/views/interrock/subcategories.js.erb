@@ -1,17 +1,13 @@
 var noValue = $('#transaction_subcategory_id').html();
 
-$('#transaction_category_id').on('change', function(){
-  
-  <% if @subcategories.count == 0 %>
-    $('#transaction_subcategory_id').html('');
-    
-    var option;
-    
-    <% @subcategories.each do |c| %>
-      <%= option = '<option value="' + c.id.to_s + '">' + c.name + '</option>' %>
-      $('#transaction_subcategory_id').append(option)
-    <% end %>
-  <% else %>
-    $('#transaction_subcategory_id').html(noValue);
+<% if @subcategories.count != 0 %>
+  $('#transaction_subcategory_id').html('');
+  var option;
+  <% @subcategories.each do |c| %>
+    <%#= option = '<option value="' + c.id.to_s + '">' + c.name + '</option>' %>
+    option = '<option value="' + '<%= c.id.to_s %>' + '">' + '<%= c.name %>' + '</option>'
+    $('#transaction_subcategory_id').append(option);
   <% end %>
-});
+<% else %>
+  $('#transaction_subcategory_id').html(noValue);
+<% end %>
