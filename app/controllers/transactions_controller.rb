@@ -16,7 +16,6 @@ class TransactionsController < ApplicationController
   
   def create
     @transaction = current_user.transactions.build(transaction_params)
-    @transaction.category_id = 1
     if @transaction.save
       flash[:success] = "入出金記録を1件追加しました。"
       redirect_to root_url
