@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   require "date"
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:edit, :destroy]
 
   def index
     @d = Date.today
@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
   end
   
   def edit
-    @transaction = current_user.transactions.find(params[:id])
+    @transaction = current_user.transactions.find_by(id: params[:id])
     @categories = Category.all()
     @subcategories = Subcategory.where(category_id: @transaction.category_id)
   end
