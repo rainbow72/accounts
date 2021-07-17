@@ -1,6 +1,9 @@
 var noValue = $('#transaction_subcategory_id').html();
+var sel = document.getElementById('transaction_subcategory_id');
 
 <% if @subcategories.count != 0 %>
+
+  sel.disabled = false
   $('#transaction_subcategory_id').html('');
 
   var option;
@@ -14,6 +17,7 @@ var noValue = $('#transaction_subcategory_id').html();
 
 <% else %>
 
+  sel.disabled = true
   $('#transaction_subcategory_id').html(noValue);
 
 <% end %>

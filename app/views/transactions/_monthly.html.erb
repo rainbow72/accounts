@@ -3,23 +3,23 @@
     <%= form_with url: search_transactions_path, local: true do |f| %>
       <div class="form-group">
         <%= f.date_select :tdate, use_month_numbers: true, discard_day: true, start_year: Date.today.year, end_year: 1900, selected: @d, class: "form-control" %>
-        <%= f.submit "View", class: "btn btn-primary" %>
+        <%= f.submit "表示", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
   <div class="col-sm-1">
-    <%= link_to "New", new_transaction_path, class: "btn btn-primary" %>
+    <%= link_to "新規", new_transaction_path, class: "btn btn-primary" %>
   </div>
 </div>
 
 <table class="table table-hover table-bordered">
   <thead class="table-primary">
     <tr>
-      <th scope="col"><div class="text-center">Date</div></th>
-      <th scope="col"><div class="text-center">Description</div></th>
-      <th scope="col"><div class="text-center">Amount (JPY)</div></th>
-      <th scope="col"><div class="text-center">Major Category</div></th>
-      <th scope="col"><div class="text-center">Minor Category</div></th>
+      <th scope="col"><div class="text-center">日付</div></th>
+      <th scope="col"><div class="text-center">内容</div></th>
+      <th scope="col"><div class="text-center">金額 (円)</div></th>
+      <th scope="col"><div class="text-center">カテゴリー</div></th>
+      <th scope="col"><div class="text-center">サブカテゴリー</div></th>
     </tr>
   </thead>
   <tbody>

@@ -9,13 +9,15 @@ class TransactionsController < ApplicationController
   end
   
   def new
+    @transaction = current_user.transactions.new
     @categories = Category.all
     @subcategories = Subcategory.where(category_id: params[:category_id])
-    @transaction = current_user.transactions.new
   end
   
   def create
     @transaction = current_user.transactions.build(transaction_params)
+    @categories = Category.all
+    @subcategories = Subcategory.where(category_id: params[:category_id])
     if @transaction.save
       flash[:success] = "入出金記録を1件追加しました。"
       redirect_to root_url

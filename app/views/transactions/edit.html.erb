@@ -1,13 +1,14 @@
 <div class="text-center">
-  <h1>Edit Transaction</h1>
+  <h1>項目の編集</h1>
 </div>
 
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3", id="form_render">
     <%= render "transactions/form" %>
+    <div class="mb-3"></div>
     <div class="text_aligned_right">
-      <%= link_to "Delete", transaction_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to "削除", transaction_path, method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
     </div>
   </div>
 </div>
